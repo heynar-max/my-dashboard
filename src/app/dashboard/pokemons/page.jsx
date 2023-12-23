@@ -1,4 +1,5 @@
-import { PokemonGrid } from "@/app/pokemons";
+import { PokemonGrid } from "@/pokemons";
+
 
 
 
@@ -11,8 +12,6 @@ const getPokemons = async( limit = 20, offset= 0 )=> {
         name: pokemon.name,
         }));
 
-    // throw new Error('Esto es un error que no debería de suceder');
-    // throw notFound();
 
     return pokemons;
 }
