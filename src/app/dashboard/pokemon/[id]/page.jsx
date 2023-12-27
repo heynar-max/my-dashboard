@@ -2,6 +2,17 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 
+//! En build time
+export async function generateStaticParams() {
+
+    const static151Pokemons = Array.from({ length: 151 }).map( (v, i) => `${i + 1}` );
+    
+        return static151Pokemons.map( id => ({
+        id: id
+        }));
+    
+    }
+
 export async function generateMetadata({ params })  {
 
     try {
@@ -27,10 +38,10 @@ const getPokemon = async(id) => {
 
     try {
         const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${ id }`,{
-        cache: 'force-cache'// TODO: cambiar esto en un futuro
-        // next: {
-        //   revalidate: 60 * 60 * 30 * 6
-        // }
+        // cache: 'force-cache',// TODO: cambiar esto en un futuro
+        next: {
+          revalidate: 60 * 60 * 30 * 6
+        }
         }).then( resp => resp.json() );
     
         console.log('Se cargó: ', pokemon.name);
